@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quito Coffee Roasters | Café de especialidad del Centro Histórico</title>
+  <meta name="description" content="Café de especialidad tostado artesanalmente en el Centro Histórico de Quito. Explora nuestro catálogo y arma tu pedido.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#" class="brand" aria-label="Quito Coffee Roasters, inicio">
+        <span class="brand-mark" aria-hidden="true">☕</span>
+        <span class="brand-name">Quito Coffee<br>Roasters</span>
+      </a>
+      <nav class="main-nav" aria-label="Navegación principal">
+        <ul>
+          <li><a href="#catalogo">Catálogo</a></li>
+          <li><a href="#pedido">Mi pedido</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+      <button class="cart-toggle" id="cart-toggle" aria-label="Ver carrito de compras" aria-expanded="false" aria-controls="pedido">
+        <span aria-hidden="true">🛒</span>
+        <span class="cart-count" id="cart-count" aria-live="polite">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">Centro Histórico de Quito · Tueste artesanal</p>
+          <h1 id="hero-title">El café que se cultiva a 2,800 metros<br>y se tuesta a media cuadra de tu casa.</h1>
+          <p class="hero-lede">Granos de origen único, seleccionados a mano y tostados en lotes pequeños. Pide en línea, elige tu zona de entrega en Quito y recíbelo el mismo día.</p>
+          <a href="#catalogo" class="btn btn-primary">Ver catálogo</a>
+        </div>
+
+        <div class="hero-widgets" role="complementary" aria-label="Clima y frase del día">
+          <div class="widget-card" id="weather-widget" aria-live="polite">
+            <p class="widget-label">Clima en Quito ahora</p>
+            <div class="widget-body" id="weather-body">
+              <span class="spinner" role="status" aria-label="Cargando clima"></span>
+            </div>
+          </div>
+
+          <div class="widget-card widget-quote" id="quote-widget" aria-live="polite">
+            <p class="widget-label">Frase del día</p>
+            <div class="widget-body" id="quote-body">
+              <span class="spinner" role="status" aria-label="Cargando frase"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATÁLOGO -->
+    <section class="catalog" id="catalogo" aria-labelledby="catalog-title">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Nuestros granos</p>
+          <h2 id="catalog-title">Catálogo de café</h2>
+        </div>
+
+        <div class="catalog-controls">
+          <div class="search-field">
+            <label for="search-input">Buscar por nombre</label>
+            <input type="search" id="search-input" name="search" placeholder="Ej. Tostado oscuro, Sidra...">
+          </div>
+
+          <fieldset class="origin-filters">
+            <legend>Filtrar por origen</legend>
+            <div class="filter-chips" id="origin-filters">
+              <button type="button" class="chip is-active" data-origin="todos" aria-pressed="true">Todos</button>
+              <button type="button" class="chip" data-origin="Ecuador" aria-pressed="false">Ecuador</button>
+              <button type="button" class="chip" data-origin="Colombia" aria-pressed="false">Colombia</button>
+              <button type="button" class="chip" data-origin="Brasil" aria-pressed="false">Brasil</button>
+              <button type="button" class="chip" data-origin="Etiopía" aria-pressed="false">Etiopía</button>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="products-grid" id="products-grid" aria-live="polite">
+          <!-- Las tarjetas de producto se generan dinámicamente vía catalog.js -->
+        </div>
+        <p class="empty-state" id="empty-state" hidden>No encontramos cafés que coincidan con tu búsqueda.</p>
+      </div>
+    </section>
+
+    <!-- CARRITO / CALCULADORA -->
+    <section class="order" id="pedido" aria-labelledby="order-title">
+      <div class="container order-inner">
+        <div class="section-heading">
+          <p class="eyebrow">Tu selección</p>
+          <h2 id="order-title">Arma tu pedido</h2>
+        </div>
+
+        <div class="order-layout">
+          <div class="cart-list-wrap">
+            <ul class="cart-list" id="cart-list" aria-live="polite">
+              <!-- Ítems del carrito generados dinámicamente vía cart.js -->
+            </ul>
+            <p class="empty-state" id="cart-empty">Tu pedido está vacío. Agrega cafés desde el catálogo.</p>
+          </div>
+
+          <div class="order-summary">
+            <div class="field-group">
+              <label for="zone-select">Zona de entrega en Quito</label>
+              <select id="zone-select" name="zone">
+                <option value="Norte">Norte — $2.50</option>
+                <option value="Centro">Centro — $1.80</option>
+                <option value="Sur">Sur — $3.00</option>
+                <option value="Valles">Valles — $3.50</option>
+              </select>
+            </div>
+
+            <dl class="totals">
+              <div class="totals-row">
+                <dt>Subtotal</dt>
+                <dd id="subtotal">$0.00</dd>
+              </div>
+              <div class="totals-row">
+                <dt>Envío</dt>
+                <dd id="shipping">$0.00</dd>
+              </div>
+              <div class="totals-row totals-row--main">
+                <dt>Total (USD)</dt>
+                <dd id="total-usd">$0.00</dd>
+              </div>
+            </dl>
+
+            <button type="button" class="btn btn-ghost" id="eur-toggle">Convertir a EUR</button>
+            <p class="totals-eur" id="total-eur" hidden aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="contact" id="contacto" aria-labelledby="contact-title">
+      <div class="container contact-inner">
+        <div class="section-heading">
+          <p class="eyebrow">Hablemos</p>
+          <h2 id="contact-title">Escríbenos</h2>
+          <p>¿Tienes una pregunta sobre tu pedido o quieres visitarnos? Completa el formulario.</p>
+        </div>
+
+        <form id="contact-form" novalidate>
+          <div class="field-group">
+            <label for="name">Nombre</label>
+            <input type="text" id="name" name="name" autocomplete="name" aria-describedby="name-error">
+            <p class="field-error" id="name-error" role="alert"></p>
+          </div>
+
+          <div class="field-group">
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" name="email" autocomplete="email" aria-describedby="email-error">
+            <p class="field-error" id="email-error" role="alert"></p>
+          </div>
+
+          <div class="field-group">
+            <label for="phone">Teléfono</label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel" aria-describedby="phone-error">
+            <p class="field-error" id="phone-error" role="alert"></p>
+          </div>
+
+          <div class="field-group">
+            <label for="message">Mensaje</label>
+            <textarea id="message" name="message" rows="4" aria-describedby="message-error"></textarea>
+            <p class="field-error" id="message-error" role="alert"></p>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+          <p class="form-success" id="form-success" role="status" hidden>¡Gracias! Recibimos tu mensaje y te responderemos pronto.</p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-block">
+        <p class="brand-name">Quito Coffee Roasters</p>
+        <p>Calle García Moreno N3-25, Centro Histórico, Quito</p>
+        <p>+593 99 123 4567 · hola@quitocoffeeroasters.ec</p>
+      </div>
+      <div class="footer-block">
+        <p class="footer-heading">Horario</p>
+        <p>Lunes a sábado, 8:00 – 19:00</p>
+        <p>Domingo, 9:00 – 14:00</p>
+      </div>
+      <div class="footer-block">
+        <p class="footer-heading">Síguenos</p>
+        <ul class="social-links">
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-credit">
+      <p>&copy; 2026 Quito Coffee Roasters. Proyecto académico — Desarrollo Web con JavaScript y Asistentes de IA.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
