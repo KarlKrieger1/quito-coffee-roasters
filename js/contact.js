@@ -1,10 +1,18 @@
-// js/contact.js
+/**
+ * @fileoverview Módulo de validación y control para el formulario de contacto de "Quito Coffee Roasters".
+ * Valida de forma nativa e interactiva los datos introducidos por el usuario, actualiza dinámicamente
+ * el estado visual del CSS corporativo e implementa atributos de accesibilidad ARIA para lectores de pantalla.
+ * 
+ * @author Karl
+ * @version 1.0.0
+ */
 
 /**
  * Valida un campo individual en tiempo real aplicando los estilos del CSS corporativo
  * y actualizando los atributos de accesibilidad ARIA correspondientes.
+ * 
  * @param {HTMLInputElement|HTMLTextAreaElement} inputElement - El campo de formulario a evaluar.
- * @returns {boolean} true si el campo cumple con las reglas de validación, de lo contrario false.
+ * @returns {boolean} True si el campo cumple con las reglas de validación, de lo contrario false.
  */
 export function validateField(inputElement) {
   const fieldGroup = inputElement.closest('.field-group');
@@ -51,8 +59,11 @@ export function validateField(inputElement) {
 }
 
 /**
- * Maneja el evento de envío del formulario. Valida todos los campos y simula el éxito del envío.
- * @param {Event} event - El evento de submit del formulario.
+ * Maneja el evento de envío del formulario de contacto.
+ * Intercepta la recarga de página por defecto, valida todos los campos del formulario de forma masiva
+ * y, si todos cumplen los criterios, despliega una alerta visual de éxito y reinicia los estados del DOM.
+ * 
+ * @param {Event} event - El evento de envío (submit) disparado por el formulario.
  */
 export function handleSubmit(event) {
   event.preventDefault();

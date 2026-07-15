@@ -1,10 +1,11 @@
-/* ===========================================================
+/* ==========================================================================
    Quito Coffee Roasters — styles.css
    Paleta: espresso oscuro + pergamino + ocre dorado + verde hoja
-   =========================================================== */
+   Metodología de organización: Arquitectura modular y responsive (Mobile-First)
+   ========================================================================== */
 
 :root {
-  /* Color */
+  /* --- Paleta de Colores Corporativa --- */
   --espresso: #2C1810;
   --roast: #6F4E37;
   --parchment: #EFE6D8;
@@ -15,27 +16,35 @@
   --error: #A3402E;
   --white: #FFFDF9;
 
-  /* Tipografía */
+  /* --- Tipografía --- */
   --font-display: 'Fraunces', serif;
   --font-body: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  /* Espaciado */
+  /* --- Espaciado Escalable --- */
   --space-xs: 0.5rem;
   --space-sm: 1rem;
   --space-md: 1.75rem;
   --space-lg: 3rem;
   --space-xl: 5rem;
 
-  /* Otros */
+  /* --- Atributos de Interfaz --- */
   --radius: 6px;
   --shadow: 0 8px 24px rgba(44, 24, 16, 0.12);
   --border: 1px solid rgba(44, 24, 16, 0.15);
 }
 
-* { box-sizing: border-box; }
+/* ==========================================================================
+   1. RESET & ESTILOS BASE
+   ========================================================================== */
 
-html { scroll-behavior: smooth; }
+* { 
+  box-sizing: border-box; 
+}
+
+html { 
+  scroll-behavior: smooth; 
+}
 
 body {
   margin: 0;
@@ -45,11 +54,19 @@ body {
   line-height: 1.55;
 }
 
-h1, h2, h3 { font-family: var(--font-display); line-height: 1.15; margin: 0; }
+h1, h2, h3 { 
+  font-family: var(--font-display); 
+  line-height: 1.15; 
+  margin: 0; 
+}
 
-p { margin: 0 0 var(--space-sm); }
+p { 
+  margin: 0 0 var(--space-sm); 
+}
 
-a { color: inherit; }
+a { 
+  color: inherit; 
+}
 
 .container {
   max-width: 1120px;
@@ -57,7 +74,7 @@ a { color: inherit; }
   padding: 0 var(--space-md);
 }
 
-/* Skip link (accesibilidad) */
+/* --- Accesibilidad y Navegación Teclado (A11y) --- */
 .skip-link {
   position: absolute;
   left: -999px;
@@ -67,12 +84,13 @@ a { color: inherit; }
   padding: 0.75rem 1.25rem;
   z-index: 100;
 }
+
 .skip-link:focus {
   left: var(--space-sm);
   top: var(--space-sm);
 }
 
-/* Foco visible siempre */
+/* Foco visible estandarizado para toda la interfaz */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
@@ -82,7 +100,10 @@ textarea:focus-visible {
   outline-offset: 2px;
 }
 
-/* ===================== HEADER ===================== */
+/* ==========================================================================
+   2. HEADER & NAVEGACIÓN
+   ========================================================================== */
+
 .site-header {
   background: var(--espresso);
   color: var(--parchment-light);
@@ -107,7 +128,11 @@ textarea:focus-visible {
   text-decoration: none;
   color: inherit;
 }
-.brand-mark { font-size: 1.5rem; }
+
+.brand-mark { 
+  font-size: 1.5rem; 
+}
+
 .brand-name {
   font-family: var(--font-display);
   font-weight: 600;
@@ -122,6 +147,7 @@ textarea:focus-visible {
   margin: 0;
   padding: 0;
 }
+
 .main-nav a {
   text-decoration: none;
   font-weight: 500;
@@ -130,7 +156,10 @@ textarea:focus-visible {
   padding-bottom: 2px;
   transition: border-color 0.2s ease;
 }
-.main-nav a:hover { border-color: var(--ochre); }
+
+.main-nav a:hover { 
+  border-color: var(--ochre); 
+}
 
 .cart-toggle {
   background: var(--ochre);
@@ -144,9 +173,15 @@ textarea:focus-visible {
   gap: 0.4rem;
   cursor: pointer;
 }
-.cart-count { font-family: var(--font-mono); }
 
-/* ===================== BUTTONS ===================== */
+.cart-count { 
+  font-family: var(--font-mono); 
+}
+
+/* ==========================================================================
+   3. BOTONES COMUNES
+   ========================================================================== */
+
 .btn {
   display: inline-block;
   border: none;
@@ -159,24 +194,33 @@ textarea:focus-visible {
   text-decoration: none;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
-.btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+
+.btn:hover { 
+  transform: translateY(-2px); 
+  box-shadow: var(--shadow); 
+}
 
 .btn-primary {
   background: var(--ochre);
   color: var(--espresso);
 }
+
 .btn-ghost {
   background: transparent;
   border: 1.5px solid var(--roast);
   color: var(--roast);
 }
 
-/* ===================== HERO ===================== */
+/* ==========================================================================
+   4. HERO SECCIÓN & INTEGRACIÓN DE APIS (CLIMA, CITAS)
+   ========================================================================== */
+
 .hero {
   background: linear-gradient(160deg, var(--espresso) 0%, var(--roast) 100%);
   color: var(--parchment-light);
   padding: var(--space-xl) 0;
 }
+
 .hero-inner {
   display: grid;
   grid-template-columns: 1.3fr 1fr;
@@ -218,6 +262,7 @@ textarea:focus-visible {
   padding: var(--space-sm) var(--space-md);
   backdrop-filter: blur(4px);
 }
+
 .widget-label {
   font-family: var(--font-mono);
   font-size: 0.75rem;
@@ -226,9 +271,21 @@ textarea:focus-visible {
   opacity: 0.7;
   margin-bottom: 0.35rem;
 }
-.widget-body { font-size: 1.1rem; font-weight: 600; min-height: 1.6rem; }
-.widget-quote .widget-body { font-family: var(--font-display); font-style: italic; font-weight: 500; font-size: 1rem; }
 
+.widget-body { 
+  font-size: 1.1rem; 
+  font-weight: 600; 
+  min-height: 1.6rem; 
+}
+
+.widget-quote .widget-body { 
+  font-family: var(--font-display); 
+  font-style: italic; 
+  font-weight: 500; 
+  font-size: 1rem; 
+}
+
+/* Animaciones e indicadores de carga para APIs */
 .spinner {
   display: inline-block;
   width: 18px;
@@ -238,16 +295,33 @@ textarea:focus-visible {
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
-@keyframes spin { to { transform: rotate(360deg); } }
 
-.widget-error { color: #E8B4A8; font-size: 0.9rem; }
+@keyframes spin { 
+  to { transform: rotate(360deg); } 
+}
 
-/* ===================== SECTION HEADING ===================== */
-.section-heading { margin-bottom: var(--space-md); max-width: 60ch; }
-.section-heading h2 { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 0.4rem; }
+.widget-error { 
+  color: #E8B4A8; 
+  font-size: 0.9rem; 
+}
 
-/* ===================== CATALOG ===================== */
-.catalog { padding: var(--space-xl) 0; }
+/* ==========================================================================
+   5. CATALOGO DE PRODUCTOS (FILTROS Y TARJETAS)
+   ========================================================================== */
+
+.section-heading { 
+  margin-bottom: var(--space-md); 
+  max-width: 60ch; 
+}
+
+.section-heading h2 { 
+  font-size: clamp(1.5rem, 3vw, 2rem); 
+  margin-bottom: 0.4rem; 
+}
+
+.catalog { 
+  padding: var(--space-xl) 0; 
+}
 
 .catalog-controls {
   display: flex;
@@ -284,6 +358,7 @@ textarea:focus-visible {
   padding: 0;
   margin: 0;
 }
+
 .origin-filters legend {
   font-weight: 600;
   font-size: 0.9rem;
@@ -291,7 +366,12 @@ textarea:focus-visible {
   padding: 0;
 }
 
-.filter-chips { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.filter-chips { 
+  display: flex; 
+  gap: 0.5rem; 
+  flex-wrap: wrap; 
+}
+
 .chip {
   border: 1.5px solid var(--roast);
   background: transparent;
@@ -302,6 +382,7 @@ textarea:focus-visible {
   font-weight: 600;
   cursor: pointer;
 }
+
 .chip.is-active {
   background: var(--roast);
   color: var(--white);
@@ -322,6 +403,7 @@ textarea:focus-visible {
   box-shadow: var(--shadow);
 }
 
+/* Sello de lote de especialidad flotante */
 .product-stamp {
   position: absolute;
   top: -10px;
@@ -344,6 +426,7 @@ textarea:focus-visible {
   margin-bottom: 0.2rem;
   font-family: var(--font-display);
 }
+
 .product-origin,
 .product-card__origin {
   display: block;
@@ -354,24 +437,28 @@ textarea:focus-visible {
   text-transform: uppercase;
   letter-spacing: 0.03em;
 }
+
 .product-notes,
 .product-card__notes {
   font-size: 0.9rem;
   opacity: 0.8;
   margin-bottom: var(--space-sm);
 }
+
 .product-footer,
 .product-card__footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .product-price,
 .product-card__price {
   font-family: var(--font-mono);
   font-weight: 700;
   font-size: 1.1rem;
 }
+
 .product-add,
 .btn--add-to-cart {
   background: var(--espresso);
@@ -384,8 +471,11 @@ textarea:focus-visible {
   font-family: var(--font-body);
   font-size: 0.9rem;
 }
+
 .product-add:hover,
-.btn--add-to-cart:hover { background: var(--roast); }
+.btn--add-to-cart:hover { 
+  background: var(--roast); 
+}
 
 .empty-state {
   text-align: center;
@@ -393,8 +483,14 @@ textarea:focus-visible {
   padding: var(--space-lg) 0;
 }
 
-/* ===================== ORDER / CART ===================== */
-.order { background: var(--parchment); padding: var(--space-xl) 0; }
+/* ==========================================================================
+   6. CARRITO DE COMPRAS & MAQUETACIÓN DE PEDIDO
+   ========================================================================== */
+
+.order { 
+  background: var(--parchment); 
+  padding: var(--space-xl) 0; 
+}
 
 .order-layout {
   display: grid;
@@ -422,8 +518,17 @@ textarea:focus-visible {
   border-radius: var(--radius);
   padding: 0.75rem var(--space-sm);
 }
-.cart-item-name { font-weight: 600; }
-.cart-item-meta { font-family: var(--font-mono); font-size: 0.85rem; opacity: 0.75; }
+
+.cart-item-name { 
+  font-weight: 600; 
+}
+
+.cart-item-meta { 
+  font-family: var(--font-mono); 
+  font-size: 0.85rem; 
+  opacity: 0.75; 
+}
+
 .cart-item-remove {
   background: none;
   border: none;
@@ -441,9 +546,14 @@ textarea:focus-visible {
   box-shadow: var(--shadow);
 }
 
-.field-group { margin-bottom: var(--space-sm); }
+.field-group { 
+  margin-bottom: var(--space-sm); 
+}
 
-.totals { margin: var(--space-md) 0; }
+.totals { 
+  margin: var(--space-md) 0; 
+}
+
 .totals-row {
   display: flex;
   justify-content: space-between;
@@ -451,7 +561,12 @@ textarea:focus-visible {
   font-family: var(--font-mono);
   font-size: 0.95rem;
 }
-.totals-row dt { font-family: var(--font-body); opacity: 0.75; }
+
+.totals-row dt { 
+  font-family: var(--font-body); 
+  opacity: 0.75; 
+}
+
 .totals-row--main {
   border-top: var(--border);
   margin-top: 0.4rem;
@@ -467,9 +582,17 @@ textarea:focus-visible {
   color: var(--leaf);
 }
 
-/* ===================== CONTACT ===================== */
-.contact { padding: var(--space-xl) 0; }
-.contact-inner { max-width: 640px; }
+/* ==========================================================================
+   7. FORMULARIO DE CONTACTO & VALIDACIÓN DINÁMICA
+   ========================================================================== */
+
+.contact { 
+  padding: var(--space-xl) 0; 
+}
+
+.contact-inner { 
+  max-width: 640px; 
+}
 
 .field-error {
   color: var(--error);
@@ -478,11 +601,13 @@ textarea:focus-visible {
   min-height: 1.1em;
 }
 
+/* Estados de feedback interactivo del cliente */
 input:invalid[data-touched="true"],
 .field-group.has-error input,
 .field-group.has-error textarea {
   border-color: var(--error);
 }
+
 .field-group.has-success input,
 .field-group.has-success textarea {
   border-color: var(--leaf);
@@ -498,18 +623,23 @@ input:invalid[data-touched="true"],
   font-weight: 600;
 }
 
-/* ===================== FOOTER ===================== */
+/* ==========================================================================
+   8. PIE DE PÁGINA (FOOTER)
+   ========================================================================== */
+
 .site-footer {
   background: var(--espresso);
   color: var(--parchment-light);
   padding: var(--space-lg) 0 var(--space-sm);
 }
+
 .footer-inner {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-lg);
   margin-bottom: var(--space-lg);
 }
+
 .footer-heading {
   font-family: var(--font-mono);
   text-transform: uppercase;
@@ -518,9 +648,22 @@ input:invalid[data-touched="true"],
   color: var(--ochre);
   margin-bottom: 0.4rem;
 }
-.social-links { list-style: none; padding: 0; margin: 0; }
-.social-links a { text-decoration: none; opacity: 0.85; }
-.social-links a:hover { opacity: 1; text-decoration: underline; }
+
+.social-links { 
+  list-style: none; 
+  padding: 0; 
+  margin: 0; 
+}
+
+.social-links a { 
+  text-decoration: none; 
+  opacity: 0.85; 
+}
+
+.social-links a:hover { 
+  opacity: 1; 
+  text-decoration: underline; 
+}
 
 .footer-credit {
   border-top: 1px solid rgba(247, 242, 233, 0.15);
@@ -529,7 +672,10 @@ input:invalid[data-touched="true"],
   opacity: 0.65;
 }
 
-/* ===================== RESPONSIVE ===================== */
+/* ==========================================================================
+   9. CONSULTAS DE MEDIOS (RESPONSIVE DESIGN)
+   ========================================================================== */
+
 @media (max-width: 900px) {
   .hero-inner { grid-template-columns: 1fr; }
   .order-layout { grid-template-columns: 1fr; }
@@ -537,13 +683,13 @@ input:invalid[data-touched="true"],
 }
 
 @media (max-width: 600px) {
-  .main-nav { display: none; } /* En un proyecto ampliado: menú hamburguesa */
+  .main-nav { display: none; } /* En una versión extendida: menú colapsable (hamburguesa) */
   .header-inner { justify-content: space-between; }
   .footer-inner { grid-template-columns: 1fr; }
   .catalog-controls { flex-direction: column; align-items: stretch; }
 }
 
-/* Respeta preferencia de movimiento reducido */
+/* Respeta la preferencia del sistema de movimiento reducido (A11y) */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;

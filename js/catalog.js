@@ -1,17 +1,25 @@
-// js/catalog.js
+/**
+ * @fileoverview Módulo del catálogo para "Quito Coffee Roasters".
+ * Se encarga de renderizar la cuadrícula de productos en base a plantillas semánticas de HTML5
+ * y de ejecutar la lógica de búsqueda y filtrado multi-criterio en tiempo real.
+ * 
+ * @author Karl
+ * @version 1.0.0
+ */
 
 import { products } from './products.js';
 
 /**
- * Genera el marcado HTML para cada producto y lo inyecta en el contenedor principal.
- * Si el listado de productos está vacío, muestra el contenedor #empty-state.
- * @param {Array} productsList - Lista de objetos de café filtrados o completos.
+ * Genera el marcado HTML para cada producto de café e inyecta las tarjetas en el contenedor principal.
+ * Si el listado de productos está vacío, remueve el atributo hidden para desplegar un mensaje de estado vacío.
+ * 
+ * @param {Array<{id: number, name: string, origin: string, notes: string, price: number}>} productsList - Lista de objetos de café a renderizar.
  */
 export function renderProducts(productsList) {
   const grid = document.getElementById('products-grid');
   const emptyState = document.getElementById('empty-state');
   
-  // Limpiar contenedor
+  // Limpiar el contenedor antes de renderizar la nueva selección
   grid.innerHTML = '';
   
   if (productsList.length === 0) {
@@ -24,7 +32,7 @@ export function renderProducts(productsList) {
   productsList.forEach(product => {
     const card = document.createElement('article');
     card.className = 'product-card';
-    card.setAttribute('data-id', product.id);
+    card.setAttribute('data-id', product.id.toString());
     
     card.innerHTML = `
       <div class="product-card__content">
@@ -44,10 +52,12 @@ export function renderProducts(productsList) {
 }
 
 /**
- * Filtra los productos de forma simultánea combinando el origen y la búsqueda de texto.
- * @param {string} origin - El origen seleccionado (ej. "Ecuador") o "All" / "" para todos.
- * @param {string} searchQuery - El texto de búsqueda ingresado por el usuario.
- * @returns {Array} Listado filtrado de productos que cumplen ambos criterios.
+ * Filtra los productos de forma simultánea combinando el origen seleccionado y la consulta por texto.
+ * Compara los campos de texto convirtiéndolos a minúsculas y limpiando los espacios en blanco extremos.
+ * 
+ * @param {string} origin - El origen seleccionado (ej. "Ecuador", "Colombia") o cadena vacía para omitir filtro.
+ * @param {string} searchQuery - El término de búsqueda introducido por el usuario para filtrar nombres o notas.
+ * @returns {Array<Object>} Listado de productos que cumplen simultáneamente ambos criterios de filtrado.
  */
 export function filterProducts(origin, searchQuery) {
   const query = searchQuery.toLowerCase().trim();
